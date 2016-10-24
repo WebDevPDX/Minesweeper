@@ -19,26 +19,54 @@
 	background-color: #FF0000;
 }
 
-.hidden {
-	background-color: #ccc;
-}
-
-.blocked {
-	background-color: #aaa;
-	color: #aaa;
-}
-
 .cell {
 	height: 30px;
 	width: 30px;
-	border: 1px solid #bbb;
 	display: inline-block;
+  	border: 3px solid #ddd;
 	font-size: 18px;
 	line-height: 18px;
 	box-sizing: border-box;
 	text-align: center;
 	padding: 5px;
 	font-family: sans-serif;
+	background-image: url('minesweeper-sprite.png');
+}
+
+.bg1 {	
+	background-position: 0px 0px;
+}
+.bg2 {
+	background-position: -24px 0px;
+}
+.bg3 {
+	background-position: -48px 0px;
+}
+.bg4 {
+	background-position: -72px 0px;
+}
+.bg5 {
+	background-position: -96px 0px;
+}
+.bg6 {
+	background-position: -120px 0px;
+}
+.bg7 {
+	background-position: -144px 0px;
+}
+.bg8 {
+	background-position: 0px 24px;
+}
+.blank {
+	background-position: -48px 24px;
+}
+
+.hidden {
+	background-position: -72px 24px;
+}
+
+.marked {
+	background-position: -24px 24px;
 }
 
 .overlay {
@@ -47,15 +75,8 @@
 	width: 80%;
 	top: 0;
 	left: 50%;
+	background-color: blue;
 	transform: translate(-50%, 0);
-}
-
-.overlay.win {
-	background-color: rgba(100, 237, 100, 0.7);
-}
-
-.overlay.loss {
-	background-color: rgba(237, 100, 100, 0.7);
 }
 
 .overlay h1 {

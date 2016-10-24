@@ -74,7 +74,7 @@ function checkForConnectedBlanks(row, col) {
 			if (fieldArray[row + direcA][col + direcB].minesAround === 0 && !fieldArray[row + direcA][col + direcB].tested) {
 				fieldArray[row + direcA][col + direcB].hidden = false;
 				fieldArray[row + direcA][col + direcB].tested = true;
-				$('#cell-' + (row + direcA) + '-' + (col + direcB)).removeClass('hidden');
+				$('#cell-' + (row + direcA) + '-' + (col + direcB)).removeClass('hidden').addClass('blank');
 				checkForConnectedBlanks((row + direcA), (col + direcB));
 			}
 		}
@@ -89,7 +89,7 @@ function buildTheGameBoard() {
         if (cell.mine) {
           return '<div class="cell mine hidden '+IndexRow+','+indexCell+'" id="cell-'+IndexRow+'-'+indexCell+'"></div>'
         } else if (cell.minesAround > 0) {
-          return '<div class="cell hidden '+IndexRow+','+indexCell+'" id="cell-'+IndexRow+'-'+indexCell+'">' + cell.minesAround + '</div>'
+          return '<div class="cell hidden '+IndexRow+','+indexCell+'" id="cell-'+IndexRow+'-'+indexCell+'"></div>'
         } else {
         	return '<div class="cell hidden '+IndexRow+','+indexCell+'" id="cell-'+IndexRow+'-'+indexCell+'"></div>'
         }
@@ -101,29 +101,31 @@ function buildTheGameBoard() {
 
 function pickTextColor(that, row, col) {
 	switch (fieldArray[row][col].minesAround) {
+		case 0: 
+		$(that).addClass('blank');
 		case 1:
-			$(that).css({'color': '#030663'})
+			$(that).addClass('bg1');
 			break;
 		case 2:
-			$(that).css({'color': '#046301'})
+			$(that).addClass('bg2');
 			break;
 		case 3:
-			$(that).css({'color': '#CC0000'})
+			$(that).addClass('bg3');
 			break;
 		case 4:
-			$(that).css({'color': '#090152'})
+			$(that).addClass('bg4');
 			break;
 		case 5:
-			$(that).css({'color': '#630101'})
+			$(that).addClass('bg5');
 			break;
 		case 6:
-			$(that).css({'color': '#178A5A'})
+			$(that).addClass('bg6');
 			break;
 		case 7:
-			$(that).css({'color': '#000000'})
+			$(that).addClass('bg7');
 			break;
 		case 8:
-			$(that).css({'color': '#808080'})
+			$(that).addClass('bg8');
 			break;
 	}
 }
@@ -215,10 +217,10 @@ $('#innerContainer').delegate('.cell', 'contextmenu', function(event){
 	var col = coords[1];
 	if (fieldArray[row][col].leftClickEnabled) {
 		fieldArray[row][col].leftClickEnabled = false;
-		$(this).addClass('blocked');
+		$(this).addClass('blocked marked');
 	} else {
 		fieldArray[row][col].leftClickEnabled = true;
-		$(this).removeClass('blocked');
+		$(this).removeClass('blocked marked');
 	}
 });
 $('#container').delegate('#again', 'click', function() {
